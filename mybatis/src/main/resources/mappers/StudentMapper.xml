@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间 对应dao层的名称/完整限定名-->
+<mapper namespace="com.hwadee.mybatis.dao.StudentDao">
+
+<!--    <cache/>-->
+
+    <!--查询所有学生信息-->
+    <select id="selectAllStudent" resultType="Student">
+        select * from student
+    </select>
+
+    <!--根据id查询学生信息-->
+    <select id="selectStudentById" resultType="Student" parameterType="Long">
+        select * from student where student_id = #{id}
+    </select>
+
+    <!--实体类入参-->
+    <select id="selectStudentByStudent" resultType="Student" parameterType="Student">
+        select * from student where student_name like concat('%',#{studentName},'%')
+    </select>
+
+    <!--增加学生信息-->
+    <insert id="insertStudent" parameterType="Student">
+        insert into student(student_name, student_birth, student_address, student_no, grade_id, student_age)
+        values (#{studentName}, #{studentBirth}, #{studentAddress}, #{studentNo}, #{gradeId}, #{studentAge})
+    </insert>
+
+    <!--修改学生信息-->
+    <update id="updateStudent" parameterType="Student">
+        update student
+        set
+            student_address = #{studentAddress}
+        where
+            student_id = #{studentId}
+    </update>
+
+    <!--删除学生信息-->
+    <delete id="deleteStudent" parameterType="Long">
+        delete from student where student_id = #{id}
+    </delete>
+
+    <!--使用注解@param,修改学生信息-->
+    <update id="updateStudentByParam" parameterType="Student">
+        update student
+        set
+            student_address = #{address}
+        where
+            student_id = #{id}
+    </update>
+
+    <!--map入参-->
+    <select id="selectStudentByMap" resultType="Student">
+        select * from student where student_name like concat('%',#{studentName},'%')
+    </select>
+
+    <!--返回map-->
+    <select id="getStudentMapRes" resultType="java.util.Map">
+        select student_name as 姓名, student_no as 学号, student_address as 地址 from student where student_id = #{studentId}
+    </select>
+
+    <!--返回多个map-->
+    <select id="getStudentMapList" resultType="java.util.Map">
+        select student_name 姓名, student_no 学号, student_address 地址 from student where student_name like concat('%', #{studentName},'%')
+    </select>
+
+
+</mapper>

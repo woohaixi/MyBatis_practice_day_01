@@ -1,0 +1,24 @@
+1.pom.xml:
+<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.31</version>//sql安装这个版本！！！
+            <scope>runtime</scope>
+ </dependency>  
+
+2.mybatis-config.xml:
+ <!--4.配置JDBC连接-->
+    <environments default="connect1">
+        <environment id="connect1">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"></property>
+                <property name="url" value="jdbc:mysql://localhost:3306/school_spring?useSSL=false&amp;serverTimezone=Asia/Shanghai"></property>
+                <property name="username" value="root"></property>
+                <property name="password" value="Qwertyuiop12"></property>
+            </dataSource>
+        </environment>
+
+3.不要忘记设置每个java文件夹为source root!!!
+4.pom.xml要右键设置为add as maven project!!!
+5.修改pom.xml时，修改完成后，可以点击右上角的m小标志进行更新，也可以点击右侧栏的m再点击reload进行更新
